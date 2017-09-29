@@ -106,6 +106,6 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>AdminCategoryServlet</servlet-name>
-    <url-pattern>/adminCategory</url-pattern>
+    <url-pattern>/adminCategoryServlet</url-pattern>
   </servlet-mapping>
 </web-app>

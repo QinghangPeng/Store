@@ -12,12 +12,11 @@ import com.store.service.CategoryService;
 import com.store.utils.BeanFactory;
 
 /**
- * 后台分类管理模块
+ * 后台分类信息查询
  */
 public class AdminCategoryServlet extends BaseServlet {
-	private static final long serialVersionUID = 1L;
 
-	protected String findAll(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String findAll(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//查询所有的分类信息
 		CategoryService categoryService = (CategoryService) BeanFactory.getBean("CategoryService");
 		List<Category> list = categoryService.findAll();
