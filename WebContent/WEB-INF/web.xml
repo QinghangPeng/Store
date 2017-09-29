@@ -10,15 +10,15 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
   <filter>
-  	<filter-name>PrivilegeFilter</filter-name>
-  	<filter-class>com.store.filter.PrivilegeFilter</filter-class>
+    <filter-name>PrivilegeFilter</filter-name>
+    <filter-class>com.store.filter.PrivilegeFilter</filter-class>
   </filter>
   <filter-mapping>
-  	<filter-name>PrivilegeFilter</filter-name>
-  	<servlet-name>OrderServlet</servlet-name>
-  	<url-pattern>/jsp/order_info.jsp</url-pattern>
-  	<url-pattern>/jsp/order_list.jsp</url-pattern>
-  	<url-pattern>/jsp/cart.jsp</url-pattern>
+    <filter-name>PrivilegeFilter</filter-name>
+    <servlet-name>OrderServlet</servlet-name>
+    <url-pattern>/jsp/order_info.jsp</url-pattern>
+    <url-pattern>/jsp/order_list.jsp</url-pattern>
+    <url-pattern>/jsp/cart.jsp</url-pattern>
   </filter-mapping>
   <servlet>
     <description></description>
@@ -97,5 +97,15 @@
   <servlet-mapping>
     <servlet-name>OrderServlet</servlet-name>
     <url-pattern>/order</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AdminCategoryServlet</display-name>
+    <servlet-name>AdminCategoryServlet</servlet-name>
+    <servlet-class>com.store.servlet.AdminCategoryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminCategoryServlet</servlet-name>
+    <url-pattern>/adminCategory</url-pattern>
   </servlet-mapping>
 </web-app>
