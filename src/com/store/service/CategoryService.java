@@ -20,4 +20,6 @@ public interface CategoryService {
 
 	List<Category> findAll() throws Exception;
 
+	void add(Category category) throws Exception;
+
 }

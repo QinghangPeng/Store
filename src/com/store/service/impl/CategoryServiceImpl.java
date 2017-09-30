@@ -51,4 +51,16 @@ public class CategoryServiceImpl implements CategoryService {
 		return list;
 	}
 
+	@Override
+	public void add(Category category) throws Exception {
+		CategoryDao dao = (CategoryDao) BeanFactory.getBean("CategoryDao");
+		dao.add(category);
+		
+		//更新缓存(清空缓存即可)
+		CacheManager cm = CacheManager.create(CategoryServiceImpl.class.
+				getClassLoader().getResourceAsStream("ehcache.xml"));
+		Cache cache = cm.getCache("categoryCache");
+		cache.remove("cList");
+	}
+
 }
