@@ -59,5 +59,15 @@ public class ProductDaoImpl implements ProductDao {
 		String sql = "select count(*) from product where cid = ?";
 		return ((Long)qr.query(sql, new ScalarHandler(),cid)).intValue();
 	}
+	
+	/**
+	 * 更新商品的cid，为删除分类时做准备
+	 */
+	@Override
+	public void updateCid(String cid) throws Exception {
+		QueryRunner qr = new QueryRunner();
+		String sql = "update product set cid = null where cid = ?";
+		qr.update(DataSourceUtils.getConnection(), sql, cid);
+	}
 
 }

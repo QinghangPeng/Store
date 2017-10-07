@@ -3,10 +3,12 @@ package com.store.service.impl;
 import java.util.List;
 
 import com.store.dao.CategoryDao;
+import com.store.dao.ProductDao;
 import com.store.dao.impl.CategoryDaoImpl;
 import com.store.domain.Category;
 import com.store.service.CategoryService;
 import com.store.utils.BeanFactory;
+import com.store.utils.DataSourceUtils;
 
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
@@ -61,6 +63,52 @@ public class CategoryServiceImpl implements CategoryService {
 				getClassLoader().getResourceAsStream("ehcache.xml"));
 		Cache cache = cm.getCache("categoryCache");
 		cache.remove("cList");
+	}
+	
+	@Override
+	public Category getById(String cid) throws Exception {
+		CategoryDao dao = (CategoryDao) BeanFactory.getBean("CategoryDao");
+		return dao.getById(cid);
+	}
+
+	@Override
+	public void update(Category category) throws Exception {
+		CategoryDao dao = (CategoryDao) BeanFactory.getBean("CategoryDao");
+		dao.update(category);
+		//清除缓存
+		CacheManager cm = CacheManager.create(CategoryServiceImpl.class.
+				getClassLoader().getResourceAsStream("ehcache.xml"));
+		Cache cache = cm.getCache("categoryCache");
+		cache.remove("cList");
+	}
+
+	@Override
+	public void delete(String cid) throws Exception {
+		
+		try {
+			//开启事务
+			DataSourceUtils.startTransaction();
+			
+			ProductDao productDao = (ProductDao) BeanFactory.getBean("ProductDao");
+			productDao.updateCid(cid);
+			
+			CategoryDao dao = (CategoryDao) BeanFactory.getBean("CategoryDao");
+			dao.delete(cid);
+			
+			//事务控制
+			DataSourceUtils.commitAndClose();
+			
+			//清除缓存
+			CacheManager cm = CacheManager.create(CategoryServiceImpl.class.
+					getClassLoader().getResourceAsStream("ehcache.xml"));
+			Cache cache = cm.getCache("categoryCache");
+			cache.remove("cList");
+		} catch (Exception e) {
+			e.printStackTrace();
+			DataSourceUtils.rollbackAndClose();
+			throw e;
+		}
+		
 	}
 
 }

@@ -8,7 +8,7 @@
 		<script language="javascript" src="${pageContext.request.contextPath}/js/public.js"></script>
 		<script type="text/javascript">
 			function addCategory(){
-				window.location.href = "${pageContext.request.contextPath}//adminCategoryServlet?method=addUI";
+				window.location.href = "${pageContext.request.contextPath}/adminCategoryServlet?method=addUI";
 			}
 		</script>
 	</HEAD>
@@ -62,13 +62,13 @@
 												${c.cname }
 											</td>
 											<td align="center" style="HEIGHT: 22px">
-												<a href="${ pageContext.request.contextPath }/adminCategory">
+												<a href="${ pageContext.request.contextPath }/adminCategoryServlet?method=getById&cid=${c.cid}">
 													<img src="${pageContext.request.contextPath}/images/i_edit.gif" border="0" style="CURSOR: hand">
 												</a>
 											</td>
 									
 											<td align="center" style="HEIGHT: 22px">
-												<a href="${ pageContext.request.contextPath }/adminCategory">
+												<a href="javascript:void(0)" onclick="deleteC('${c.cid}')">
 													<img src="${pageContext.request.contextPath}/images/i_del.gif" width="16" height="16" border="0" style="CURSOR: hand">
 												</a>
 											</td>
@@ -80,5 +80,13 @@
 				</TBODY>
 			</table>
 	</body>
+	<script type="text/javascript">
+		function deleteC(cid){
+			if(confirm("您确定要删除该分类吗?")){
+				location.href="${ pageContext.request.contextPath }/adminCategoryServlet?method=delete&cid="+cid;
+				
+			}
+		}
+	</script>
 </HTML>
 

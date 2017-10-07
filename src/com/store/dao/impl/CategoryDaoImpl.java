@@ -38,4 +38,25 @@ public class CategoryDaoImpl implements CategoryDao {
 		qr.update(sql,category.getCid(),category.getCname());
 	}
 
+	@Override
+	public Category getById(String cid) throws Exception {
+		QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
+		String sql = "select * from category where cid = ?";
+		return qr.query(sql, new BeanHandler<>(Category.class),cid);
+	}
+
+	@Override
+	public void update(Category category) throws Exception {
+		QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
+		String sql = "update category set cname = ? where cid = ?";
+		qr.update(sql, category.getCname(),category.getCid());
+	}
+
+	@Override
+	public void delete(String cid) throws Exception {
+		QueryRunner qr = new QueryRunner();
+		String sql = "delete from category where cid = ?";
+		qr.update(DataSourceUtils.getConnection(),sql,cid);
+	}
+
 }

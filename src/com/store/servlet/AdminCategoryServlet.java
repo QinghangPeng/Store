@@ -1,9 +1,7 @@
 package com.store.servlet;
 
-import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -67,6 +65,71 @@ public class AdminCategoryServlet extends BaseServlet {
 		
 		CategoryService categoryService = (CategoryService) BeanFactory.getBean("CategoryService");
 		categoryService.add(category);
+		response.sendRedirect(request.getContextPath()+"/adminCategoryServlet?method=findAll");
+		return null;
+	}
+	
+	/**
+	 * 通过id获取分类信息
+	 * @Description:
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 * @author 作者 penghao
+	 * @since：2017年10月7日 下午11:35:11
+	 */
+	public String getById(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String cid = request.getParameter("cid");
+		
+		CategoryService categoryService = (CategoryService) BeanFactory.getBean("CategoryService");
+		Category category = categoryService.getById(cid);
+		
+		request.setAttribute("bean", category);
+		
+		return "/admin/category/edit.jsp";
+	}
+	
+	/**
+	 * 跟新分类信息
+	 * @Description:
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 * @author 作者 penghao
+	 * @since：2017年10月7日 下午11:53:31
+	 */
+	public String update(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String cid = request.getParameter("cid");
+		String cname = request.getParameter("cname");
+		
+		Category category = new Category();
+		category.setCid(cid);
+		category.setCname(cname);
+		
+		CategoryService categoryService = (CategoryService) BeanFactory.getBean("CategoryService");
+		categoryService.update(category);
+		response.sendRedirect(request.getContextPath()+"/adminCategoryServlet?method=findAll");
+		return null;
+	}
+	
+	/**
+	 * 删除分类信息
+	 * @Description:
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 * @author 作者 penghao
+	 * @since：2017年10月8日 上午12:11:44
+	 */
+	public String delete(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String cid = request.getParameter("cid");
+		
+		CategoryService categoryService = (CategoryService) BeanFactory.getBean("CategoryService");
+		categoryService.delete(cid);
+		
 		response.sendRedirect(request.getContextPath()+"/adminCategoryServlet?method=findAll");
 		return null;
 	}

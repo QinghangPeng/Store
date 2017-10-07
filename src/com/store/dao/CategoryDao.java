@@ -22,4 +22,10 @@ public interface CategoryDao {
 
 	void add(Category category) throws Exception;
 
+	Category getById(String cid) throws Exception;
+
+	void update(Category category) throws Exception;
+
+	void delete(String cid) throws Exception;
+
 }
