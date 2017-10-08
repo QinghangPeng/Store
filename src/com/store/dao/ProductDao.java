@@ -30,4 +30,6 @@ public interface ProductDao {
 
 	void updateCid(String cid) throws Exception;
 
+	List<Product> findAll() throws Exception;
+
 }

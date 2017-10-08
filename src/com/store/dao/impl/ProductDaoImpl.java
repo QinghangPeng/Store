@@ -70,4 +70,11 @@ public class ProductDaoImpl implements ProductDao {
 		qr.update(DataSourceUtils.getConnection(), sql, cid);
 	}
 
+	@Override
+	public List<Product> findAll() throws Exception {
+		QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
+		String sql = "select * from product";
+		return qr.query(sql, new BeanListHandler<>(Product.class));
+	}
+
 }

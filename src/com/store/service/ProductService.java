@@ -27,4 +27,6 @@ public interface ProductService {
 
 	PageBean<Product> findByPage(int currPage, int pageSize, String cid) throws Exception;
 
+	List<Product> findAll() throws Exception;
+
 }
