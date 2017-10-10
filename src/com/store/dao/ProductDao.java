@@ -32,4 +32,6 @@ public interface ProductDao {
 
 	List<Product> findAll() throws Exception;
 
+	void add(Product product) throws Exception;
+
 }

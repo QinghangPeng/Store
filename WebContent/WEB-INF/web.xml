@@ -118,4 +118,14 @@
     <servlet-name>AdminProductServlet</servlet-name>
     <url-pattern>/adminProduct</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddProductServlet</display-name>
+    <servlet-name>AddProductServlet</servlet-name>
+    <servlet-class>com.store.servlet.AddProductServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddProductServlet</servlet-name>
+    <url-pattern>/addProduct</url-pattern>
+  </servlet-mapping>
 </web-app>

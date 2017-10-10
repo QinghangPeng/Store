@@ -77,4 +77,14 @@ public class ProductDaoImpl implements ProductDao {
 		return qr.query(sql, new BeanListHandler<>(Product.class));
 	}
 
+	@Override
+	public void add(Product product) throws Exception {
+		QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
+		String sql = "insert into product values(?,?,?,?,?,?,?,?,?,?)";
+		qr.update(sql,product.getPid(),product.getPname(),product.getMarket_price(),
+				product.getShop_price(),product.getPimage(),product.getPdate(),
+				product.getIs_hot(),product.getPdesc(),product.getPflag(),
+				product.getCategory().getCid());
+	}
+
 }

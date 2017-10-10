@@ -71,5 +71,14 @@ public class ProductServiceImpl implements ProductService {
 		ProductDao pdao = (ProductDao) BeanFactory.getBean("ProductDao");
 		return pdao.findAll();
 	}
+	
+	/**
+	 * 添加商品
+	 */
+	@Override
+	public void add(Product product) throws Exception {
+		ProductDao pdao = (ProductDao) BeanFactory.getBean("ProductDao");
+		pdao.add(product);
+	}
 
 }
