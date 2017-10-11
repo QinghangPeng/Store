@@ -31,4 +31,6 @@ public interface OrderDao {
 
 	void updateOrder(Order order) throws Exception;
 
+	List<Order> findAllByState(String state) throws Exception;
+
 }

@@ -74,5 +74,14 @@ public class OrderServiceImpl implements OrderService {
 		OrderDao orderDao = (OrderDao) BeanFactory.getBean("OrderDao");
 		orderDao.updateOrder(order);
 	}
+	
+	/**
+	 * 查询订单
+	 */
+	@Override
+	public List<Order> findAllByState(String state) throws Exception {
+		OrderDao orderDao = (OrderDao) BeanFactory.getBean("OrderDao");
+		return orderDao.findAllByState(state);
+	}
 
 }

@@ -1,5 +1,7 @@
 package com.store.service;
 
+import java.util.List;
+
 import com.store.domain.Order;
 import com.store.domain.PageBean;
 import com.store.domain.User;
@@ -25,5 +27,7 @@ public interface OrderService {
 	Order getById(String oid) throws Exception;
 
 	void updateOrder(Order order) throws Exception;
+
+	List<Order> findAllByState(String state) throws Exception;
 
 }
