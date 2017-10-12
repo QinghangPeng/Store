@@ -60,5 +60,27 @@ public class AdminOrderServlet extends BaseServlet {
 		response.getWriter().println(json);
 		return null;
 	}
+	
+	/**
+	 * 修改订单的状态
+	 * @Description:
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 * @author 作者 penghao
+	 * @since：2017年10月12日 下午9:17:08
+	 */
+	public String updateState(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String oid = request.getParameter("oid");
+		String state = request.getParameter("state");
+		OrderService orderService = (OrderService) BeanFactory.getBean("OrderService");
+		Order order = orderService.getById(oid);
+		order.setState(2);
+		orderService.updateOrder(order);
+		//重定向到未发货的界面
+		response.sendRedirect(request.getContextPath()+"/adminOrder?method=findAllByState&state=1");
+		return null;
+	}
 
 }

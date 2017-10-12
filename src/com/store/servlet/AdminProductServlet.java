@@ -55,7 +55,7 @@ public class AdminProductServlet extends BaseServlet {
 	}
 	
 	/**
-	 * 
+	 * 商品上下架
 	 * @Description:
 	 * @param request
 	 * @param response
@@ -64,8 +64,40 @@ public class AdminProductServlet extends BaseServlet {
 	 * @author 作者 penghao
 	 * @since：2017年10月10日 下午10:10:36
 	 */
-	public String add(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		return "/admin/product/add.jsp";
+	public String changeTheShelf(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String pid = request.getParameter("pid");
+		String pflag = request.getParameter("pflag");
+		ProductService pService = (ProductService) BeanFactory.getBean("ProductService");
+		Product product = pService.getByPid(pid);
+		//改变状态
+		product.setPflag(Integer.parseInt(pflag));
+		pService.update(product);
+		//重定向
+		if("1".equals(pflag)) {
+			response.sendRedirect(request.getContextPath()+"/adminProduct?method=findAll");
+		} else {
+			response.sendRedirect(request.getContextPath()+"/adminProduct?method=findAllDown");
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * 查询所有下架商品
+	 * @Description:
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 * @author 作者 penghao
+	 * @since：2017年10月12日 下午9:57:29
+	 */
+	public String findAllDown(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ProductService pService = (ProductService) BeanFactory.getBean("ProductService");
+		List<Product> list = pService.findAllDown();
+		
+		request.setAttribute("list", list);
+		return "/admin/product/list_down.jsp";
 	}
 
 }

@@ -8,6 +8,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tomcat.jni.OS;
+
 import com.store.domain.Cart;
 import com.store.domain.CartItem;
 import com.store.domain.Order;
@@ -255,4 +257,25 @@ public class OrderServlet extends BaseServlet {
 		return "/jsp/msg.jsp";
 		
 	}
+	
+	/**
+	 * 确认收货
+	 * @Description:
+	 * @param request
+	 * @param response
+	 * @return
+	 * @author 作者 penghao
+	 * @throws Exception 
+	 * @since：2017年10月12日 下午9:25:53
+	 */
+	public String updateState(HttpServletRequest request,HttpServletResponse response) throws Exception {
+		String oid = request.getParameter("oid");
+		OrderService orderService = (OrderService) BeanFactory.getBean("OrderService");
+		Order order = orderService.getById(oid);
+		order.setState(3);
+		orderService.updateOrder(order);
+		response.sendRedirect(request.getContextPath()+"/order?method=findAllByPage&currPage=1");
+		return null;
+	}
+	
 }

@@ -81,4 +81,16 @@ public class ProductServiceImpl implements ProductService {
 		pdao.add(product);
 	}
 
+	@Override
+	public void update(Product product) throws Exception {
+		ProductDao pdao = (ProductDao) BeanFactory.getBean("ProductDao");
+		pdao.update(product);
+	}
+
+	@Override
+	public List<Product> findAllDown() throws Exception {
+		ProductDao pdao = (ProductDao) BeanFactory.getBean("ProductDao");
+		return pdao.findAllDown();
+	}
+
 }

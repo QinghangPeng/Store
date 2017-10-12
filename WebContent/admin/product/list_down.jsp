@@ -23,14 +23,6 @@
 						</TD>
 					</tr>
 					<tr>
-						<td class="ta_01" align="right">
-							<button type="button" id="add" name="add" value="添加" class="button_add" onclick="addProduct()">
-添加商品
-</button>
-
-						</td>
-					</tr>
-					<tr>
 						<td class="ta_01" align="center" bgColor="#f5fafe">
 							<table cellspacing="0" cellpadding="1" rules="all"
 								bordercolor="gray" border="1" id="DataGrid1"
@@ -57,7 +49,7 @@
 										编辑
 									</td>
 									<td width="7%" align="center">
-										下架
+										上架
 									</td>
 								</tr>
 								<c:forEach items="${list }" var="p" varStatus="vs">
@@ -91,7 +83,7 @@
 											</td>
 									
 											<td align="center" style="HEIGHT: 22px">
-												<a href="${pageContext.request.contextPath}/adminProduct?method=changeTheShelf&pid=${p.pid}&pflag=1">
+												<a href="${pageContext.request.contextPath}/adminProduct?method=changeTheShelf&pid=${p.pid}&pflag=0">
 													<img src="${pageContext.request.contextPath}/images/i_del.gif" width="16" height="16" border="0" style="CURSOR: hand">
 												</a>
 											</td>

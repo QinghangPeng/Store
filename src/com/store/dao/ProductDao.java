@@ -34,4 +34,8 @@ public interface ProductDao {
 
 	void add(Product product) throws Exception;
 
+	void update(Product product) throws Exception;
+
+	List<Product> findAllDown() throws Exception;
+
 }

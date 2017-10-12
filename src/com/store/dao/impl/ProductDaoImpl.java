@@ -73,7 +73,7 @@ public class ProductDaoImpl implements ProductDao {
 	@Override
 	public List<Product> findAll() throws Exception {
 		QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
-		String sql = "select * from product";
+		String sql = "select * from product where pflag = 0";
 		return qr.query(sql, new BeanListHandler<>(Product.class));
 	}
 
@@ -85,6 +85,20 @@ public class ProductDaoImpl implements ProductDao {
 				product.getShop_price(),product.getPimage(),product.getPdate(),
 				product.getIs_hot(),product.getPdesc(),product.getPflag(),
 				product.getCategory().getCid());
+	}
+
+	@Override
+	public void update(Product product) throws Exception {
+		QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
+		String sql = "update product set pflag = ? where pid = ? ";
+		qr.update(sql,product.getPflag(),product.getPid());
+	}
+
+	@Override
+	public List<Product> findAllDown() throws Exception {
+		QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
+		String sql = "select * from product where pflag = 1";
+		return qr.query(sql, new BeanListHandler<>(Product.class));
 	}
 
 }
