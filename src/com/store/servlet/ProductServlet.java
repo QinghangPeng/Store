@@ -1,7 +1,14 @@
 package com.store.servlet;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +18,7 @@ import com.store.domain.Product;
 import com.store.service.ProductService;
 import com.store.service.impl.ProductServiceImpl;
 import com.store.utils.BeanFactory;
+import com.store.utils.CookUtils;
 
 /**
  * 商品servlet
@@ -37,6 +45,44 @@ public class ProductServlet extends BaseServlet {
 		try {
 			product = ps.getByPid(pid);
 			request.setAttribute("bean", product);
+			//获取指定的cookie
+			Cookie cookie = CookUtils.getCookieByName("pids", request.getCookies());
+			String pids = "";
+			if(cookie == null) {
+				pids = pid;
+			}else {
+				//获取值
+				pids = cookie.getValue();
+				String[] splits = pids.split("-");
+				//此list长度不变
+				List<String> list = Arrays.asList(splits);
+				LinkedList<String> linkedList = new LinkedList<>(list);
+				if(linkedList.contains(pid)) {
+					//若包含pid  那么将pid移除并放到最前面
+					linkedList.remove(pid);
+					linkedList.addFirst(pid);
+				} else {
+					//若不包含pid 继续判断长度是否大于6
+					if(linkedList.size() > 5) {
+						linkedList.removeLast();
+						linkedList.addFirst(pid);
+					} else {
+						linkedList.addFirst(pid);
+					}
+				}
+				pids = "";
+				for (String s : linkedList) {
+					pids += (s+"-");
+				}
+				pids = pids.substring(0,pids.length()-1);
+			}
+			cookie = new Cookie("pids", pids);
+			//设置访问路径
+			cookie.setPath(request.getContextPath()+"/");
+			//设置存活时间
+			cookie.setMaxAge(3600);
+			//写会浏览器
+			response.addCookie(cookie);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -49,7 +49,7 @@ font {
 
 	<div class="col-md-8" style="background:#fff;padding:40px 80px;margin:30px;border:7px solid #ccc;">
 		<font>会员注册</font>USER REGISTER
-		<form class="form-horizontal" style="margin-top:5px;" action="${pageContext.request.contextPath }/user?method=regist" method="post">
+		<form id="registForm" class="form-horizontal" style="margin-top:5px;" action="${pageContext.request.contextPath }/user?method=regist" method="post">
 			 <div class="form-group">
 			    <label for="username" class="col-sm-2 control-label">用户名</label>
 			    <div class="col-sm-6">
@@ -101,18 +101,18 @@ font {
 			  <div class="form-group">
 			    <label for="date" class="col-sm-2 control-label">验证码</label>
 			    <div class="col-sm-3">
-			      <input type="text" class="form-control"  >
-			      
+			    <table>
+			    	<tr>
+			    		<td><input type="text" id="inputPassword3" class="form-control" style="width: 190px;"  /></td>
+			    		<td><label id="v_container" style="width: 100px;height: 34px;"></label></td>
+			    	</tr>
+			    </table>
 			    </div>
-			    <div class="col-sm-2">
-			    <img src="${pageContext.request.contextPath}/image/captcha.jhtml"/>
-			    </div>
-			    
 			  </div>
 			 
 			  <div class="form-group">
 			    <div class="col-sm-offset-2 col-sm-10">
-			      <input type="submit"  width="100" value="注册" name="submit" border="0"
+			      <input type="button"  width="100" value="注册" name="regist" border="0" onclick="checkCode()" 
 				    style="background: url('${pageContext.request.contextPath}/images/register.gif') no-repeat scroll 0 0 rgba(0, 0, 0, 0);
 				    height:35px;width:100px;color:white;">
 			    </div>
@@ -148,7 +148,21 @@ font {
 			Copyright &copy; 2005-2016 传智商城 版权所有
 		</div>
 
-</body></html>
+</body>
+<script src="${pageContext.request.contextPath}/js/gVerify.js" type="text/javascript"></script>
+ <script type="text/javascript">
+    var verifyCode = new GVerify("v_container");
+ 	function checkCode() {
+ 		var res = verifyCode.validate(document.getElementById("inputPassword3").value);
+ 		if(res) {
+ 			document.getElementById("registForm").submit();
+ 		} else {
+ 			alert("验证码错误");
+ 		}
+ 		
+ 	}
+ </script>
+</html>
 
 
 

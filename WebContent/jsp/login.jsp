@@ -50,7 +50,7 @@ font {
 				<font>会员登录</font>USER LOGIN ${msg }
 
 				<div>&nbsp;</div>
-<form class="form-horizontal" action="${pageContext.request.contextPath }/user?method=login" method="post">
+<form id="loginForm" class="form-horizontal" action="${pageContext.request.contextPath }/user?method=login" method="post">
   
  <div class="form-group">
     <label for="username" class="col-sm-2 control-label">用户名</label>
@@ -61,20 +61,25 @@ font {
    <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
     <div class="col-sm-6">
-      <input type="password" class="form-control" id="inputPassword3" placeholder="请输入密码" name="password">
+      <input type="password" class="form-control" id="code_input" placeholder="请输入密码" name="password">
     </div>
   </div>
    <div class="form-group">
         <label for="inputPassword3" class="col-sm-2 control-label">验证码</label>
     <div class="col-sm-3">
-      <input type="text" class="form-control" id="inputPassword3" placeholder="请输入验证码">
+	    <table>
+	    	<tr>
+	      		<td>
+	      			<input type="text" class="form-control" id="inputPassword3" placeholder="请输入验证码" style="width: 190px;">
+	      		</td>
+	      		<td>
+	      			<label id="v_container" style="width: 100px;height: 34px;"></label>
+	      		</td>
+	      	</tr>
+	    </table>	
     </div>
-    <div class="col-sm-3">
-      <img src="${pageContext.request.contextPath}/image/captcha.jhtml"/>
-    </div>
-    
   </div>
-   <div class="form-group">
+   <!-- <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <div class="checkbox">
         <label>
@@ -85,12 +90,12 @@ font {
         </label>
       </div>
     </div>
-  </div>
+  </div> -->
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-    <input type="submit"  width="100" value="登录" name="submit" border="0"
+    <input type="button"  width="100" value="登录" name="login" border="0"
     style="background: url('${pageContext.request.contextPath}/images/login.gif') no-repeat scroll 0 0 rgba(0, 0, 0, 0);
-    height:35px;width:100px;color:white;">
+    height:35px;width:100px;color:white;" onclick="checkCode()">
     </div>
   </div>
 </form>
@@ -119,4 +124,18 @@ font {
 		<div style="text-align: center;margin-top: 5px;margin-bottom:20px;">
 			Copyright &copy; 2005-2016 传智商城 版权所有
 		</div>
-</body></html>
+</body>
+<script src="${pageContext.request.contextPath}/js/gVerify.js" type="text/javascript"></script>
+ <script type="text/javascript">
+    var verifyCode = new GVerify("v_container");
+ 	function checkCode() {
+ 		var res = verifyCode.validate(document.getElementById("inputPassword3").value);
+ 		if(res) {
+ 			document.getElementById("loginForm").submit();
+ 		} else {
+ 			alert("验证码错误");
+ 		}
+ 		
+ 	}
+ </script>
+</html>

@@ -1,3 +1,7 @@
+<%@page import="com.store.domain.Product"%>
+<%@page import="com.store.utils.BeanFactory"%>
+<%@page import="com.store.service.ProductService"%>
+<%@page import="com.store.utils.CookUtils"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -110,7 +114,29 @@
 			<div style="overflow: hidden;">
 
 				<ul style="list-style: none;">
-					<li style="width: 150px;height: 216;float: left;margin: 0 8px 0 0;padding: 0 18px 15px;text-align: center;"><img src="${pageContext.request.contextPath}/products/1/cs10001.jpg" width="130px" height="130px" /></li>
+					<%
+						Cookie cookie = CookUtils.getCookieByName("pids", request.getCookies());
+						if(cookie == null) {
+					%>
+							<h3>暂无浏览记录，快去选购商品吧~~</h3>
+					<%
+						} else {
+							String[] arr = cookie.getValue().split("-");
+							for(String pid:arr) {
+								ProductService ps = (ProductService)BeanFactory.getBean("ProductService");
+								Product product = ps.getByPid(pid);
+								String pimage = product.getPimage();
+					%>
+								<li style="width: 150px;height: 216;float: left;margin: 0 8px 0 0;padding: 0 18px 15px;text-align: center;">
+									<a href="${pageContext.request.contextPath }/product?method=getById&pid=<%=pid %>">
+										<img src="${pageContext.request.contextPath}/<%=pimage %>" width="130px" height="130px" />
+									</a>
+								</li>	
+					<%
+							}
+						}
+					%>
+					
 				</ul>
 
 			</div>
