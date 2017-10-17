@@ -42,7 +42,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">首页</a>
+				<a class="navbar-brand" href="${pageContext.request.contextPath}">首页</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -52,9 +52,9 @@
 						<li><a href="#">${c.cname }</a></li>
 					</c:forEach> --%>
 				</ul>
-				<form class="navbar-form navbar-right" role="search">
+				<form class="navbar-form navbar-right" role="search" action="${pageContext.request.contextPath}/product?method=selectProduct" method="post">
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Search">
+						<input name="pname" type="text" class="form-control" placeholder="Search">
 					</div>
 					<button type="submit" class="btn btn-default">Submit</button>
 				</form>
@@ -81,4 +81,17 @@
 		"json");
 		
 	});
+	
+	/* function searchProduct() {
+		var pname = document.getElementById("searchText").value;
+		if(pname == "") {
+			alert("请输入您要搜索的商品名字~");
+		} else {
+			 $.ajax({ 
+				type:'POST',
+				url:"${pageContext.request.contextPath}/product?method=selectProduct",
+				data:{pname:pname}});
+			//location.href = "http://localhost:8080${pageContext.request.contextPath}/product?method=selectProduct&pname"+pname;
+		}
+	} */
 </script>

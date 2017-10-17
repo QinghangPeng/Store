@@ -44,7 +44,7 @@
 					<!-- <li><a href="#">首页</a></li> -->
 				</ol>
 			</div>
-			<c:forEach items="${pageBean.list }" var="p">
+			<c:forEach items="${list }" var="p">
 				<div class="col-md-2">
 					<a href="${pageContext.request.contextPath }/product?method=getById&pid=${p.pid}">
 						<img src="${pageContext.request.contextPath}/${p.pimage}" width="170" height="170" style="display: inline-block;">

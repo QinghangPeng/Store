@@ -35,4 +35,6 @@ public interface ProductService {
 
 	List<Product> findAllDown() throws Exception;
 
+	List<Product> selectProduct(String pname) throws Exception;
+
 }

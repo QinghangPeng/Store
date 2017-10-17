@@ -115,5 +115,22 @@ public class ProductServlet extends BaseServlet {
 		}
 		return "/jsp/product_list.jsp";
 	}
-
+	
+	/**
+	 * 搜索商品
+	 * @Description:
+	 * @param request
+	 * @param response
+	 * @return
+	 * @author 作者 penghao
+	 * @throws Exception 
+	 * @since：2017年10月17日 下午10:10:29
+	 */
+	public String selectProduct(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String pname = request.getParameter("pname");
+		ProductService ps = (ProductService) BeanFactory.getBean("ProductService");
+		List<Product> list = ps.selectProduct(pname);
+		request.setAttribute("list", list);
+		return "/jsp/product_search.jsp";
+	}
 }

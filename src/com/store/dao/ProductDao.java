@@ -38,4 +38,6 @@ public interface ProductDao {
 
 	List<Product> findAllDown() throws Exception;
 
+	List<Product> selectProduct(String pname) throws Exception;
+
 }

@@ -93,4 +93,10 @@ public class ProductServiceImpl implements ProductService {
 		return pdao.findAllDown();
 	}
 
+	@Override
+	public List<Product> selectProduct(String pname) throws Exception {
+		ProductDao pdao = (ProductDao) BeanFactory.getBean("ProductDao");
+		return pdao.selectProduct(pname);
+	}
+
 }

@@ -101,4 +101,11 @@ public class ProductDaoImpl implements ProductDao {
 		return qr.query(sql, new BeanListHandler<>(Product.class));
 	}
 
+	@Override
+	public List<Product> selectProduct(String pname) throws Exception {
+		QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
+		String sql = "select * from product where pname like ?";
+		return qr.query(sql, new BeanListHandler<>(Product.class),"%"+pname+"%");
+	}
+
 }
