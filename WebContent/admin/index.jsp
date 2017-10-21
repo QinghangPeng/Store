@@ -16,11 +16,15 @@ body {
 </head>
 <body style="background: #278296">
 <center></center>
-<form method="post" action="${pageContext.request.contextPath }/admin/home.jsp" target="_parent" name='theForm' onsubmit="return validate()">
+<form method="post" action="${pageContext.request.contextPath }/user?method=adminUserLogin" target="_parent" name='theForm'>
   <table cellspacing="0" cellpadding="0" style="margin-top: 100px" align="center">
   <tr>
     <td style="padding-left: 50px">
       <table>
+      <tr>
+      	<td>&nbsp;</td>
+      	<td>${msg }</td>
+      </tr>
       <tr>
         <td>管理员姓名：</td>
         <td><input type="text" name="username" /></td>

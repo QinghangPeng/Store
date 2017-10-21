@@ -20,6 +20,15 @@
     <url-pattern>/jsp/order_list.jsp</url-pattern>
     <url-pattern>/jsp/cart.jsp</url-pattern>
   </filter-mapping>
+  <filter>
+    <filter-name>AdminUserFilter</filter-name>
+    <filter-class>com.store.filter.AdminUserFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AdminUserFilter</filter-name>
+    <servlet-name>Admin*Servlet</servlet-name>
+    <url-pattern>/admin/home.jsp</url-pattern>
+  </filter-mapping>
   <servlet>
     <description></description>
     <display-name>BaseServlet</display-name>

@@ -159,5 +159,35 @@ public class UserServlet extends BaseServlet {
 		response.sendRedirect(request.getContextPath());
 		return null;
 	}
+	
+	/**
+	 * 管理员登录
+	 * @Description:
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 * @author 作者 penghao
+	 * @since：2017年10月19日 下午11:07:16
+	 */
+	public String adminUserLogin(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		password = MD5Utils.md5(password);
+		
+		UserService s = (UserService) BeanFactory.getBean("UserService");
+		User adminUser = s.login(username,password);
+		
+		if(adminUser == null) {
+			//用户密码不匹配
+			request.setAttribute("msg", "用户名密码不匹配");
+			return "/admin/index.jsp";
+		}
+		
+		request.getSession().setAttribute("adminUser", adminUser);
+		response.sendRedirect(request.getContextPath()+"/admin/home.jsp");
+		
+		return null;
+	}
 
 }

@@ -57,7 +57,7 @@
 		</div>
 
 		<!--分页 -->
-		<div style="width:380px;margin:0 auto;margin-top:50px;">
+		<%-- <div style="width:380px;margin:0 auto;margin-top:50px;">
 			<ul class="pagination" style="text-align:center; margin-top:10px;">
 				
 				<!-- 判断当前页是否为首页 -->
@@ -99,7 +99,7 @@
 				</c:if>
 				
 			</ul>
-		</div>
+		</div> --%>
 		<!-- 分页结束=======================        -->
 
 		<!--
@@ -159,7 +159,7 @@
 			</ul>
 		</div>
 		<div style="text-align: center;margin-top: 5px;margin-bottom:20px;">
-			Copyright &copy; 2005-2016 传智商城 版权所有
+			Copyright &copy; 2005-2017 网上商城 版权所有
 		</div>
 
 	</body>
