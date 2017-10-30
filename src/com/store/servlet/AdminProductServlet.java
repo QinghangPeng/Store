@@ -99,5 +99,26 @@ public class AdminProductServlet extends BaseServlet {
 		request.setAttribute("list", list);
 		return "/admin/product/list_down.jsp";
 	}
+	
+	/**
+	 * 跳转到修改商品界面
+	 * @Description:
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 * @author 作者 penghao
+	 * @since：2017年10月30日 下午8:01:53
+	 */
+	public String editUI(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String pid = request.getParameter("pid");
+		ProductService pService = (ProductService) BeanFactory.getBean("ProductService");
+		CategoryService cService = (CategoryService) BeanFactory.getBean("CategoryService");
+		Product product = pService.getByPid(pid);
+		List<Category> list = cService.findAll();
+		request.setAttribute("product", product);
+		request.setAttribute("list", list);
+		return "/admin/product/edit.jsp";
+	}
 
 }
