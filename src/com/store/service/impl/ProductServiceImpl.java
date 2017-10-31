@@ -99,4 +99,10 @@ public class ProductServiceImpl implements ProductService {
 		return pdao.selectProduct(pname);
 	}
 
+	@Override
+	public void updateProduct(Product product) throws Exception {
+		ProductDao pdao = (ProductDao) BeanFactory.getBean("ProductDao");
+		pdao.updateProduct(product);
+	}
+
 }

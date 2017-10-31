@@ -108,4 +108,14 @@ public class ProductDaoImpl implements ProductDao {
 		return qr.query(sql, new BeanListHandler<>(Product.class),"%"+pname+"%");
 	}
 
+	@Override
+	public void updateProduct(Product product) throws Exception {
+		QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
+		String sql = "update product set pname = ?,market_price = ?,shop_price = ?,"
+				+ "pimage = ?,pdate = ?,is_hot = ?,pdesc = ?,cid = ? where pid = ? ";
+		qr.update(sql,product.getPname(),product.getMarket_price(),product.getShop_price(),
+				product.getPimage(),product.getPdate(),product.getIs_hot(),
+				product.getPdesc(),product.getCategory().getCid(),product.getPid());
+	}
+
 }

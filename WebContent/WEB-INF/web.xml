@@ -147,4 +147,14 @@
     <servlet-name>AdminOrderServlet</servlet-name>
     <url-pattern>/adminOrder</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EditProductServlet</display-name>
+    <servlet-name>EditProductServlet</servlet-name>
+    <servlet-class>com.store.servlet.EditProductServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditProductServlet</servlet-name>
+    <url-pattern>/editProduct</url-pattern>
+  </servlet-mapping>
 </web-app>

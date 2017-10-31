@@ -19,8 +19,10 @@
 	
 	<body>
 		<!--  -->
-		<form id="userAction_save_do" name="Form1" action="${pageContext.request.contextPath}/adminProduct_update.action" method="post" enctype="multipart/form-data">
+		<form id="userAction_save_do" name="Form1" action="${pageContext.request.contextPath}/editProduct" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="pid" value="${product.pid }">
+			<input type="hidden" name="pflag" value="${product.pflag }">
+			<input type="hidden" name="opimage" value="${product.pimage }">
 			
 			
 			&nbsp;
@@ -70,7 +72,7 @@
 						商品图片：
 					</td>
 					<td class="ta_01" bgColor="#ffffff" colspan="3">
-						<input type="file" name="upload" />
+						<input type="file" name="pimage" />
 					</td>
 				</tr>
 				<tr>
@@ -78,7 +80,7 @@
 						所属分类：
 					</td>
 					<td class="ta_01" bgColor="#ffffff" colspan="3">
-						<select name="categorySecond.csid">
+						<select name="cid">
 							<c:forEach var="c" items="${list }">
 								<option value="${c.cid }" <c:if test="${c.cid == product.category.cid}">selected</c:if>>${c.cname }</option>
 							</c:forEach>

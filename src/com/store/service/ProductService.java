@@ -37,4 +37,6 @@ public interface ProductService {
 
 	List<Product> selectProduct(String pname) throws Exception;
 
+	void updateProduct(Product product) throws Exception;
+
 }
