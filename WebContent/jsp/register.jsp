@@ -103,7 +103,7 @@ font {
 			    <div class="col-sm-3">
 			    <table>
 			    	<tr>
-			    		<td><input type="text" id="inputPassword3" class="form-control" style="width: 190px;"  /></td>
+			    		<td><input type="text" id="uucheckCode" class="form-control" style="width: 190px;"  /></td>
 			    		<td><label id="v_container" style="width: 100px;height: 34px;"></label></td>
 			    	</tr>
 			    </table>
@@ -153,7 +153,7 @@ font {
  <script type="text/javascript">
     var verifyCode = new GVerify("v_container");
  	function checkCode() {
- 		var res = verifyCode.validate(document.getElementById("inputPassword3").value);
+ 		var res = verifyCode.validate(document.getElementById("uucheckCode").value);
  		if(res) {
  			document.getElementById("registForm").submit();
  		} else {

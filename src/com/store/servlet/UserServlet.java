@@ -182,6 +182,12 @@ public class UserServlet extends BaseServlet {
 			//用户密码不匹配
 			request.setAttribute("msg", "用户名密码不匹配");
 			return "/admin/index.jsp";
+		} else {
+			//判断是否为管理员
+			if (Constant.ADMIN_USER != adminUser.getState()) {
+				request.setAttribute("msg", "非管理员用户");
+				return "/admin/index.jsp";
+			}
 		}
 		
 		request.getSession().setAttribute("adminUser", adminUser);
